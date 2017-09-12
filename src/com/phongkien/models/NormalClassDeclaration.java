@@ -1,42 +1,15 @@
 package com.phongkien.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.phongkien.enums.ClassDeclarationType;
 
-public class NormalClassDeclaration {
-	private List<String> classModifier;
-	private String identifier;
-	
-	//TODO typeParameters
+public class NormalClassDeclaration extends ClassDeclaration {
+	// TODO typeParameters
 
-	//TODO annotation and stuff
+	// TODO annotation and stuff
 	private String superClass;
-	
-	//TODO annotation and stuff
-	private List<String> interfaces;
 
-	public List<String> getClassModifier() {
-		return classModifier;
-	}
-
-	public void setClassModifier(List<String> classModifier) {
-		this.classModifier = classModifier;
-	}
-	
-	public void addClassModifier(String modifier) {
-		if (this.classModifier == null) {
-			this.classModifier = new ArrayList<String>();
-		}
-		
-		this.classModifier.add(modifier);
-	}
-
-	public String getIdentifier() {
-		return identifier;
-	}
-
-	public void setIdentifier(String identifier) {
-		this.identifier = identifier;
+	public NormalClassDeclaration() {
+		this.setClassDeclarationType(ClassDeclarationType.Class);
 	}
 
 	public String getSuperClass() {
@@ -47,19 +20,41 @@ public class NormalClassDeclaration {
 		this.superClass = superClass;
 	}
 
-	public List<String> getInterfaces() {
-		return interfaces;
+	public String generate(int startingTabCount) {
+		StringBuilder sb = new StringBuilder();
+
+		// ignore class modifier
+		// TODO service, component, etc
+		switch (this.getObjectType()) {
+		case Function:
+			// TODO need parameters
+			// this.println(sb, 0, "export function " + this.getIdentifier());
+			break;
+		case Component:
+			break;
+		case Service:
+			// TODO add Injectable import
+			this.println(sb, 0, "@Injectable()");
+			break;
+		default:
+			this.println(sb, 0, "export class " + this.getIdentifier() + this.superClassDeclaration()
+					+ this.superInterfaceDeclaration() + " {");
+			
+			//TODO class body
+			this.println(sb, 0, "}");
+			break;
+		}
+
+		return sb.toString();
 	}
 
-	public void setInterfaces(List<String> interfaces) {
-		this.interfaces = interfaces;
+	private String superClassDeclaration() {
+		// TODO
+		return "";
 	}
-	
-	public void addIdenterface(String interfaceName) {
-		if (this.interfaces == null) {
-			this.interfaces = new ArrayList<String>();
-		}
-		
-		this.interfaces.add(interfaceName);
+
+	private String superInterfaceDeclaration() {
+		// TODO
+		return "";
 	}
 }

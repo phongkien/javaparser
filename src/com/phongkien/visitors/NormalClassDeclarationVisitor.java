@@ -1,18 +1,31 @@
 package com.phongkien.visitors;
 
+import static java.util.stream.Collectors.toList;
+
 import com.phongkien.Java8BaseVisitor;
 import com.phongkien.Java8Parser;
 import com.phongkien.models.NormalClassDeclaration;
 
-public class NormalClassDeclarationVisitor extends Java8BaseVisitor<NormalClassDeclaration>{
-	public NormalClassDeclaration visitNormalClassDeclaration(Java8Parser.NormalClassDeclarationContext ctx)  {
+public class NormalClassDeclarationVisitor extends Java8BaseVisitor<NormalClassDeclaration> {
+	public NormalClassDeclaration visitNormalClassDeclaration(Java8Parser.NormalClassDeclarationContext ctx) {
 		NormalClassDeclaration normalClassDeclaration = new NormalClassDeclaration();
-		
-		//get class name
+
+		// class modifiers
+		ClassModifierVisitor classModifierVisitor = new ClassModifierVisitor();
+		normalClassDeclaration.setModifiers(
+				ctx.classModifier().stream().map(cm -> cm.accept(classModifierVisitor)).collect(toList()));
+
+		// get class name/identifier
 		normalClassDeclaration.setIdentifier(ctx.Identifier().getText());
-		
-		//ctx.classModifier()
-		
+
+		// TODO typeParameters
+
+		// TODO super class
+
+		// TODO super interfaces
+
+		// TODO classBody
+
 		return normalClassDeclaration;
 	}
 }
