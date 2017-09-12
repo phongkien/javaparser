@@ -3,9 +3,7 @@ package com.phongkien.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.phongkien.interfaces.Generator;
-
-public class JavaObjectDeclaration extends Generator {
+public class JavaObjectDeclaration {
 	private String packageDeclaration;
 	private List<String> importDeclarations;
 	private List<TypeDeclaration> typeDeclarations;
@@ -40,22 +38,5 @@ public class JavaObjectDeclaration extends Generator {
 
 	public void setTypeDeclarations(List<TypeDeclaration> typeDeclarations) {
 		this.typeDeclarations = typeDeclarations;
-	}
-
-	public String generate(int startingTabCount) {
-		StringBuilder sb = new StringBuilder();
-
-		// imports
-
-		// declarations
-		if (this.getTypeDeclarations() != null && this.getTypeDeclarations().size() > 0) {
-			this.getTypeDeclarations().forEach(td -> sb.append(td.generate(0)));
-		}
-
-		return sb.toString();
-	}
-
-	public String toString() {
-		return this.generate(0);
 	}
 }

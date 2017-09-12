@@ -1,15 +1,13 @@
 package com.phongkien.models;
 
-import com.phongkien.interfaces.Generator;
+public class TypeDeclaration {
+	private JavaObjectDeclaration javaObjectDeclaration;
 
-public class TypeDeclaration extends Generator {
-
-	@Override
-	public String generate(int startingTabCount) {
-		return "";
+	public JavaObjectDeclaration getJavaObjectDeclaration() {
+		return javaObjectDeclaration;
 	}
 
-	public String toString() {
-		return this.generate(0);
+	public void setJavaObjectDeclaration(JavaObjectDeclaration javaObjectDeclaration) {
+		this.javaObjectDeclaration = javaObjectDeclaration;
 	}
 }

@@ -1,6 +1,6 @@
 package com.phongkien.visitors;
 
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Collectors;
 
 import com.phongkien.Java8BaseVisitor;
 import com.phongkien.Java8Parser;
@@ -13,7 +13,7 @@ public class NormalClassDeclarationVisitor extends Java8BaseVisitor<NormalClassD
 		// class modifiers
 		ClassModifierVisitor classModifierVisitor = new ClassModifierVisitor();
 		normalClassDeclaration.setModifiers(
-				ctx.classModifier().stream().map(cm -> cm.accept(classModifierVisitor)).collect(toList()));
+				ctx.classModifier().stream().map(cm -> cm.accept(classModifierVisitor)).collect(Collectors.toList()));
 
 		// get class name/identifier
 		normalClassDeclaration.setIdentifier(ctx.Identifier().getText());

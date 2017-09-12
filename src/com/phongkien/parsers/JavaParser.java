@@ -9,6 +9,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 
 import com.phongkien.Java8Lexer;
 import com.phongkien.Java8Parser;
+import com.phongkien.generators.TypeScriptGenerator;
 import com.phongkien.models.JavaObjectDeclaration;
 import com.phongkien.visitors.CompilationUnitVisitor;
 
@@ -30,7 +31,8 @@ public class JavaParser {
 
 		CompilationUnitVisitor visitor = new CompilationUnitVisitor();
 		JavaObjectDeclaration jo = visitor.visit(parser.compilationUnit());
-		
-		System.out.println(jo);
+
+		TypeScriptGenerator tsg = new TypeScriptGenerator(jo);
+		System.out.println(tsg.generate(0));
 	}
 }
